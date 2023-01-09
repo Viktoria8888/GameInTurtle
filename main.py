@@ -1,6 +1,8 @@
 import turtle
 from Board import Board
 from Airplane import Airplane
+from Comet import Comet
+import time
 
 def turtle_setup():
     turtle.penup()
@@ -17,9 +19,23 @@ def main():
     turtle_setup()
     board = Board(turtle)
     airplane = Airplane(turtle)
-    
+    comets = [Comet(turtle) for _ in range(15)]
+
     board.draw_board_background()
     airplane.draw_airplane()
+    
+    while True:
+        turtle.clear()
+        board.draw_board_background()
+        for comet in comets:
+            comet.update_comet()
+        for comet in comets:
+            comet.draw_comet()
+        turtle.update()
+        time.sleep(0.01)
+        
+        
+
     turtle.done()
     
 
