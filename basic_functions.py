@@ -2,7 +2,7 @@ import turtle
 from parameters import *
 
 def reset_turtle():
-    turtle.goto(-turtle.window_width() / 3, -turtle.window_height() / 3)
+    turtle.goto(LEFT_SWITCH, RIGHT_SWITCH)
     turtle.setheading(90)
     if __debug__:
         turtle.dot(10)
@@ -14,6 +14,11 @@ def draw_pixel(color="black"):
         turtle.forward(PIXEL_SIZE)
         turtle.right(90)
     turtle.end_fill()
+
+def move_turtle(x, y):
+    x, y = scale_cords(x, y)
+    turtle.goto(x + LEFT_SWITCH, y + RIGHT_SWITCH)
+    
 
 def scale_cords(x, y):
     if x < 0 or x >= ROW_LEN or y < 0 or y >= COL_LEN:

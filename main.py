@@ -13,8 +13,9 @@ def turtle_setup():
 def main():
     turtle_setup()
     board = Board()
-    while True:
-        board.draw_board()
+    
+    board.draw_board_background()
+    turtle.done()
     
 
 if __name__ == '__main__':
