@@ -3,6 +3,8 @@ from Board import Board
 from Airplane import Airplane
 from Comet import Comet
 import time
+from pynput import keyboard
+from basic_functions import *
 
 def turtle_setup():
     turtle.penup()
@@ -21,18 +23,32 @@ def main():
     airplane = Airplane(turtle)
     comets = [Comet(turtle) for _ in range(15)]
 
-    board.draw_board_background()
-    airplane.draw_airplane()
+    def key_pressed(key):
+        if key == keyboard.Key.right:
+            airplane.move_right()
+        if key == keyboard.Key.left:
+            airplane.move_left()
+
+    listener = keyboard.Listener(on_press=key_pressed)
+    listener.start()
     
     while True:
-        turtle.clear()
-        board.draw_board_background()
-        for comet in comets:
-            comet.update_comet()
-        for comet in comets:
-            comet.draw_comet()
-        turtle.update()
-        time.sleep(0.01)
+        for faze in range(3):
+            turtle.clear()
+            board.draw_board_background()
+            if faze == 0:
+                for comet in comets:
+                    comet.update_comet()
+            for comet in comets:
+                comet.draw_comet()
+                if is_collision_comet_airplane(comet, airplane):
+                    print("Game Over")
+                    exit()
+            
+            airplane.draw_airplane()
+            
+            turtle.update()
+            time.sleep(0.01)
         
         
 

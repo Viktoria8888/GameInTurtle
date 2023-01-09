@@ -19,12 +19,17 @@ def move_turtle(x, y):
     x, y = scale_cords(x, y)
     turtle.goto(x + LEFT_SWITCH, y + RIGHT_SWITCH)
     
-
 def scale_cords(x, y):
     if x < 0 or x >= ROW_LEN or y < 0 or y >= COL_LEN:
         raise ValueError("Invalid cords", x, y)
 
     return x * PIXEL_SIZE, y * PIXEL_SIZE
+
+def is_collision_comet_airplane(comet, airplane):
+    for x, y in airplane.body:
+        if comet.x == x and comet.y == y:
+            return True
+    return False
 
 
 if __name__ == "__main__":
