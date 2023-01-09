@@ -6,10 +6,16 @@ class Board:
         pass
 
     def draw_board_background(self):
-        for y in range(COL_LEN):
-            for x in range(ROW_LEN):
-                move_turtle(x, y)
-                draw_pixel("grey")
+        reset_turtle()
+        turtle.fillcolor("grey")
+        turtle.begin_fill()
+        for _ in range(2):
+            turtle.forward(ROW_LEN * PIXEL_SIZE)
+            turtle.right(90)
+            turtle.forward(COL_LEN * PIXEL_SIZE)
+            turtle.right(90)
+        turtle.end_fill()
+
 
 if __name__ == "__main__":
     board = Board()
