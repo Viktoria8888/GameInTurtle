@@ -22,7 +22,7 @@ def move_turtle(x, y):
 
 def scale_cords(x, y):
     if x < 0 or x >= ROW_LEN or y < 0 or y >= COL_LEN:
-        raise ValueError("Invalid cords")
+        raise ValueError("Invalid cords", x, y)
 
     return x * PIXEL_SIZE, y * PIXEL_SIZE
 
